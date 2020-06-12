@@ -1,0 +1,1 @@
+CREATE TABLE trade(id serial PRIMARY KEY,trade_id VARCHAR (20), trade_version integer, country_party_id VARCHAR (20), book_id VARCHAR (20), maturity_date timestamp, created_date timestamp, expired boolean);

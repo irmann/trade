@@ -9,7 +9,7 @@ info:
   license: 
     name: "MIT"
 host: "localhost"
-basePath: "/api/v1"
+basePath: ""
 schemes: 
   - "http"
 consumes: 

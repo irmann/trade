@@ -9,6 +9,16 @@ public class Trade {
     private String bookId;
     private String maturityDate;
 
+    public Trade() {}
+
+    public Trade(String tradeId, Long tradeVersion, String countryPartyId, String bookId, String maturityDate) {
+        this.tradeId = tradeId;
+        this.tradeVersion = tradeVersion;
+        this.countryPartyId = countryPartyId;
+        this.bookId = bookId;
+        this.maturityDate = maturityDate;
+    }
+
     public String getTradeId() {
         return tradeId;
     }
