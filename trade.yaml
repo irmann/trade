@@ -1,0 +1,64 @@
+swagger: "2.0"
+info: 
+  version: "1.0.0"
+  title: ""
+  description: ""
+  termsOfService: ""
+  contact: 
+    name: "Trade API"
+  license: 
+    name: "MIT"
+host: "localhost"
+basePath: "/api/v1"
+schemes: 
+  - "http"
+consumes: 
+  - "application/json"
+produces: 
+  - "application/json"
+paths: 
+  /trade:
+    post: 
+      description: "store a trade"
+      operationId: "store_trade"
+      produces: 
+        - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/StoreTradeReq"
+      responses: 
+        "200":
+          description: ""
+          schema:  
+            $ref: "#/definitions/StoreTradeRes"
+
+
+definitions:
+  StoreTradeReq:
+    type: "object"
+    properties:
+        tradeId:
+          type: "string" 
+        tradeVersion:
+          type: "long"
+        contryPartyId:
+          type: "string"
+        bookId:
+          type: "string"
+        maturityDate:
+          type: "string"
+
+  StoreTradeRes:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+      message:
+        type: "string"
+      error_code:
+        type: "int"
+
