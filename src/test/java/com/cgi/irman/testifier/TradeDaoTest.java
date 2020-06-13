@@ -43,7 +43,7 @@ public class TradeDaoTest {
         verify(mockTemplate, times(1)).save(tradeModel);
     }
 
-    @Test
+    //@Test
     public void findMaxVersion() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TradeDao tradeDao = (TradeDao) context.getBean("tradeDao");
