@@ -1,12 +1,30 @@
 package com.cgi.irman.testifier;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 
+@Entity
+@Table(name = "trade")
 public class TradeModel {
 
+    public TradeModel() {
+
+    }
+    
+    public TradeModel(BigInteger id, String tradeId, Long tradeVersion, String countryPartyId, String bookId, Date maturityDate, Date createdDate, Boolean expired) {
+        Id = id;
+        this.tradeId = tradeId;
+        this.tradeVersion = tradeVersion;
+        this.countryPartyId = countryPartyId;
+        this.bookId = bookId;
+        this.maturityDate = maturityDate;
+        this.createdDate = createdDate;
+        this.expired = expired;
+    }
+
     @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private BigInteger Id;
 

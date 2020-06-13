@@ -3,7 +3,8 @@
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.w3.org/2001/XMLSchema"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
         http://www.springframework.org/schema/tx
@@ -32,7 +33,7 @@
     </bean>
 
     <bean id="nullValidator" class="com.cgi.irman.testifier.validation.NullValidator"/>
-    <bean id="dateValidator" class="com.cgi.irman.testifier.validation.dateValidator"/>
+    <bean id="dateValidator" class="com.cgi.irman.testifier.validation.DateValidator"/>
     <bean id="versionValidator" class="com.cgi.irman.testifier.validation.VersionValidator"/>
     <bean id="greetingDao" class="com.cgi.irman.testifier.GreetingDao">
         <property name="hibernateTemplate" ref="hibernateTemplate" />
@@ -41,7 +42,8 @@
         <property name="hibernateTemplate" ref="hibernateTemplate" />
     </bean>
     <bean id="tradeService" class="com.cgi.irman.testifier.TradeService">
-        <property name="validator" >
+        <property name="tradeDao"  ref="tradeDao"/>
+        <property name="validators" >
             <list value-type="com.cgi.irman.testifier.validation.ValidatorInterface">
                 <ref bean="nullValidator"/>
                 <ref bean="dateValidator"/>

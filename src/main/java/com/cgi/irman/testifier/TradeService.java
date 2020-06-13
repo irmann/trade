@@ -3,7 +3,6 @@ package com.cgi.irman.testifier;
 import com.cgi.irman.testifier.exceptions.ValidatorException;
 import com.cgi.irman.testifier.util.Constants;
 import com.cgi.irman.testifier.validation.ValidatorInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -37,7 +36,6 @@ public class TradeService {
         return tradeDao;
     }
 
-    @Autowired
     public void setTradeDao(TradeDao tradeDao) {
         this.tradeDao = tradeDao;
     }

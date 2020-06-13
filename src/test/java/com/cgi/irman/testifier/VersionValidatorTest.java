@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.orm.hibernate5.HibernateTemplate;
+
+import java.util.Optional;
+
 import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_VERSION;
 
 import static org.mockito.Mockito.when;
@@ -38,9 +41,8 @@ public class VersionValidatorTest extends BaseTest{
     public void failedValidateVersion() throws Exception {
         Trade trade = getTrade();
         trade.setTradeVersion(1l);
-        TradeModel tradeModel = getTradeModel(trade);
-        tradeModel.setTradeVersion(2l);
-        when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(tradeModel);
+        Optional<Long> max = Optional.of(2l);
+        when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);
         try{
             versionValidator.validate(trade);
             Assertions.fail();
@@ -53,9 +55,8 @@ public class VersionValidatorTest extends BaseTest{
     public void successfulValidateVersion() throws Exception {
         Trade trade = getTrade();
         trade.setTradeVersion(2l);
-        TradeModel tradeModel = getTradeModel(trade);
-        tradeModel.setTradeVersion(1l);
-        when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(tradeModel);
+        Optional<Long> max = Optional.of(1l);
+        when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);
         try{
             versionValidator.validate(trade);
         }catch (ValidatorException validatorException){
