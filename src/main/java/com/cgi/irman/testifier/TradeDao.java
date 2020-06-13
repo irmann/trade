@@ -35,9 +35,9 @@ public class TradeDao {
                         .add(Projections.max("tradeVersion"), "tradeVersion"));
         criteria.setResultTransformer(Transformers.aliasToBean(TradeModel.class));
         List<?> list = hibernateTemplate.findByCriteria(criteria);
-        if (list.size() > 0)
-            return Optional.ofNullable(((TradeModel) list.get(0)).getTradeVersion());
-        return Optional.ofNullable(null);
+        return list.stream().map(trade ->
+                ((TradeModel)trade).getTradeVersion())
+                .findFirst();
     }
 
     @Transactional(readOnly = false)
