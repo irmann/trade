@@ -9,7 +9,7 @@ info:
   license: 
     name: "MIT"
 host: "localhost"
-basePath: ""
+basePath: "/api/v1/"
 schemes: 
   - "http"
 consumes: 
@@ -51,6 +51,8 @@ definitions:
           type: "string"
         maturityDate:
           type: "string"
+        expired:
+          type: "bool"
 
   StoreTradeRes:
     type: "object"

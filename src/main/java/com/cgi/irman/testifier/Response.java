@@ -1,9 +1,13 @@
 package com.cgi.irman.testifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Response {
     private int status;
     private String message;
     private int errorCode;
+    private List<TradeModel> payload = new ArrayList<>();
 
     public Response(int status, String message, int errorCode) {
         this.status = status;
@@ -33,6 +37,14 @@ public class Response {
 
     public void setErrorCode(int errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public List<TradeModel> getPayload() {
+        return payload;
+    }
+
+    public void setPayload(List<TradeModel> payload) {
+        this.payload = payload;
     }
 
     @Override

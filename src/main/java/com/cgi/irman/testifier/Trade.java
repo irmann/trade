@@ -8,15 +8,17 @@ public class Trade {
     private String countryPartyId;
     private String bookId;
     private String maturityDate;
+    private Boolean expired;
 
     public Trade() {}
 
-    public Trade(String tradeId, Long tradeVersion, String countryPartyId, String bookId, String maturityDate) {
+    public Trade(String tradeId, Long tradeVersion, String countryPartyId, String bookId, String maturityDate, Boolean expired) {
         this.tradeId = tradeId;
         this.tradeVersion = tradeVersion;
         this.countryPartyId = countryPartyId;
         this.bookId = bookId;
         this.maturityDate = maturityDate;
+        this.expired = expired;
     }
 
     public String getTradeId() {
@@ -57,5 +59,13 @@ public class Trade {
 
     public void setMaturityDate(String maturityDate) {
         this.maturityDate = maturityDate;
+    }
+
+    public Boolean getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Boolean expired) {
+        this.expired = expired;
     }
 }

@@ -53,4 +53,9 @@ public class TradeDao {
         return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
     }
 
+    public List<TradeModel> findAll() {
+        DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
+        return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
+    }
+
 }

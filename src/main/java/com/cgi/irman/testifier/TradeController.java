@@ -34,7 +34,7 @@ public class TradeController {
 
     private TradeService service;
 
-    @PostMapping("/trade")
+    @PostMapping("/api/v1/trade")
     public Response storeTrade(@RequestBody Trade trade) throws Exception {
         if(service.getValidators() == null)
             service = ApplicationContextHolder.getContext().getBean(TradeService.class);
@@ -48,6 +48,13 @@ public class TradeController {
         return response;
     }
 
+    @GetMapping("/api/v1/trade")
+    public Response findAllTrades() throws Exception {
+        service = ApplicationContextHolder.getContext().getBean(TradeService.class);
+        Response response = new Response(0, "OK", 0);
+        response.setPayload(service.findAll());
+        return response;
+    }
 
     private KafkaTemplate<Integer, String> createTemplate() {
         Map<String, Object> senderProps = senderProps();

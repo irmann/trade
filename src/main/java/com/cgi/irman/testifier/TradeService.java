@@ -26,12 +26,15 @@ public class TradeService {
         TradeModel tradeModel = new TradeModel(trade.getTradeId(), trade.getTradeVersion(),
                 trade.getCountryPartyId(), trade.getBookId(),
                 new SimpleDateFormat(Constants.DD_MM_YYYY).parse(trade.getMaturityDate()),
-                new Date(), false);
+                new Date(), trade.getExpired());
 
         tradeDao.save(tradeModel);
         return new Response(0, "OK", 0);
     }
 
+    public List<TradeModel> findAll() {
+        return tradeDao.findAll();
+    }
     public TradeDao getTradeDao() {
         return tradeDao;
     }
