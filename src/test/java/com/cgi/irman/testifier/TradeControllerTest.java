@@ -1,5 +1,6 @@
 package com.cgi.irman.testifier;
 
+import com.cgi.irman.testifier.util.JsonUtil;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
@@ -30,10 +31,10 @@ public class TradeControllerTest extends BaseTest{
         Response response = new Response(0, "OK", 0);
         Mockito.when(service.store(any(Trade.class))).thenReturn(response);
         this.mockMvc.perform(post("/trade")
-                .content(asJsonString(trade))
+                .content(JsonUtil.asJsonString(trade))
                 .contentType("application/json")).andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString(
-                        asJsonString(response))));
+                        JsonUtil.asJsonString(response))));
     }
 }

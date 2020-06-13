@@ -18,13 +18,4 @@ public class BaseTest {
                 new SimpleDateFormat("dd/MM/yyyy").parse(trade.getMaturityDate()),
                 new Date(), false);
     }
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 }
