@@ -12,21 +12,21 @@
         http://www.springframework.org/schema/context
 	    http://www.springframework.org/schema/context/spring-context-2.5.xsd"
 >
-    <context:annotation-config />
+    <context:annotation-config/>
     <tx:annotation-driven/>
     <bean
             class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver" />
-        <property name="url" value="jdbc:postgresql://localhost:5432/demo" />
-        <property name="username" value="postgres" />
-        <property name="password" value="mysecretpassword" />
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/demo"/>
+        <property name="username" value="postgres"/>
+        <property name="password" value="mysecretpassword"/>
     </bean>
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="com.cgi.irman.testifier" />
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.cgi.irman.testifier"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -35,15 +35,13 @@
     <bean id="nullValidator" class="com.cgi.irman.testifier.validation.NullValidator"/>
     <bean id="dateValidator" class="com.cgi.irman.testifier.validation.DateValidator"/>
     <bean id="versionValidator" class="com.cgi.irman.testifier.validation.VersionValidator"/>
-    <bean id="greetingDao" class="com.cgi.irman.testifier.GreetingDao">
-        <property name="hibernateTemplate" ref="hibernateTemplate" />
-    </bean>
+
     <bean id="tradeDao" class="com.cgi.irman.testifier.TradeDao">
-        <property name="hibernateTemplate" ref="hibernateTemplate" />
+        <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="tradeService" class="com.cgi.irman.testifier.TradeService">
-        <property name="tradeDao"  ref="tradeDao"/>
-        <property name="validators" >
+        <property name="tradeDao" ref="tradeDao"/>
+        <property name="validators">
             <list value-type="com.cgi.irman.testifier.validation.ValidatorInterface">
                 <ref bean="nullValidator"/>
                 <ref bean="dateValidator"/>
@@ -52,6 +50,6 @@
         </property>
     </bean>
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory" />
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 </beans>
