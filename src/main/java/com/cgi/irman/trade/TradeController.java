@@ -5,6 +5,8 @@ import com.cgi.irman.trade.util.JsonUtil;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,41 +20,48 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+import static com.cgi.irman.trade.util.Constants.ERROR_INTERNAL;
+
 @RestController
 public class TradeController {
 
+    Logger logger = LoggerFactory.getLogger(TradeController.class);
+
     KafkaTemplate<Integer, String> kafkaTemplate = createTemplate();
 
-    public TradeService getService() {
-        return service;
-    }
+    //TODO Autowired is used only for an unit test. Unify initializing the service for unit test and production runtime
     @Autowired
-    public void setService(TradeService service) {
-        this.service = service;
-    }
-
     private TradeService service;
 
     @PostMapping("/api/v1/trade")
     public Response storeTrade(@RequestBody Trade trade) throws Exception {
-        if(service.getValidators() == null)
-            service = ApplicationContextHolder.getContext().getBean(TradeService.class);
+        try{
+            // To differentiate initializing the service between unit test and production runtime
+            if(service.getValidators() == null)
+                service = ApplicationContextHolder.getContext().getBean(TradeService.class);
 
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        executor.submit(() -> kafkaTemplate.send("test", JsonUtil.asJsonString(trade)));
-        Future<Response> futureTask = executor.submit(() -> {
-            return service.store(trade);
-        });
-        Response response = futureTask.get(5, TimeUnit.SECONDS);
-        return response;
+            ExecutorService executor = Executors.newFixedThreadPool(2);
+            executor.submit(() -> kafkaTemplate.send("test", JsonUtil.asJsonString(trade)));
+            Future<Response> futureTask = executor.submit(() -> {
+                return service.store(trade);
+            });
+            return futureTask.get(5, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            logger.error("error while storing a trade", e);
+            return new Response(1, e.getMessage(), ERROR_INTERNAL);
+        }
     }
 
     @GetMapping("/api/v1/trade")
     public Response findAllTrades() throws Exception {
-        service = ApplicationContextHolder.getContext().getBean(TradeService.class);
-        Response response = new Response(0, "OK", 0);
-        response.setPayload(service.findAll());
-        return response;
+        try{
+            service = ApplicationContextHolder.getContext().getBean(TradeService.class);
+            Response response = new Response(0, "OK", 0);
+            return new Response(0, "OK", 0, service.findAll());
+        } catch (Exception e) {
+            logger.error("error while finding all trades", e);
+            return new Response(1, e.getMessage(), ERROR_INTERNAL);
+        }
     }
 
     private KafkaTemplate<Integer, String> createTemplate() {

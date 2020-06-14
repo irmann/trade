@@ -15,6 +15,13 @@ public class Response {
         this.errorCode = errorCode;
     }
 
+    public Response(int status, String message, int errorCode, List<TradeModel> payload) {
+        this.status = status;
+        this.message = message;
+        this.errorCode = errorCode;
+        this.payload = payload;
+    }
+
     public int getStatus() {
         return status;
     }
