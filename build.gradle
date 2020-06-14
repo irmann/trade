@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.0.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
 }
 
 group = 'com.cgi.irman'
@@ -9,23 +9,21 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	//testCompile group: 'junit', name: 'junit', version: '4.13'
-	implementation 'org.springframework.kafka:spring-kafka:2.5.2.RELEASE'
-	implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.17.Final'
-	implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
-	implementation group: 'org.springframework', name: 'spring-orm', version: '5.2.7.RELEASE'
-
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    implementation 'org.springframework.kafka:spring-kafka:2.5.2.RELEASE'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.4.17.Final'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
+    implementation group: 'org.springframework', name: 'spring-orm', version: '5.2.7.RELEASE'
 }
 
 test {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
 

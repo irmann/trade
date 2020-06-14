@@ -35,7 +35,14 @@ paths:
           description: ""
           schema:  
             $ref: "#/definitions/StoreTradeRes"
-
+    get:
+      description: "find all trades"
+      operationId: "find_all_trades"
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: "#/definitions/StoreTradeRes"
 
 definitions:
   StoreTradeReq:
@@ -63,4 +70,6 @@ definitions:
         type: "string"
       error_code:
         type: "int"
+      payload:
+        type: "array"
 
