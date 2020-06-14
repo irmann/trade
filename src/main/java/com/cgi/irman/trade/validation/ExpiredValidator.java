@@ -1,16 +1,16 @@
 package com.cgi.irman.trade.validation;
 
 import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.TradeModel;
 import com.cgi.irman.trade.TradeRepository;
 import com.cgi.irman.trade.exceptions.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.text.MessageFormat;
 import java.util.Optional;
 
-import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_VERSION;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_EXPIRED;
 
-public class VersionValidator extends ValidatorBase implements ValidatorInterface{
+public class ExpiredValidator implements ValidatorInterface{
 
     TradeRepository tradeRepository;
 
@@ -23,11 +23,10 @@ public class VersionValidator extends ValidatorBase implements ValidatorInterfac
         this.tradeRepository = tradeRepository;
     }
 
-    @Override
+
     public void validate(Trade trade) throws ValidatorException {
-        Optional<Long> max = this.tradeRepository.findMaxVersion(trade.getTradeId());
-        if(max.orElse(-1l) >= trade.getTradeVersion())
-            throw new ValidatorException(ERROR_VALIDATION_VERSION, MessageFormat.format(
-                    "Version must be higher then {0}", max.get()));
+        Optional<TradeModel> tradeModelO = tradeRepository.findLastVersionByTradId(trade.getTradeId());
+        if (tradeModelO.isPresent() && tradeModelO.get().getExpired())
+            throw new ValidatorException(ERROR_VALIDATION_EXPIRED, "trade is already expired");
     }
 }

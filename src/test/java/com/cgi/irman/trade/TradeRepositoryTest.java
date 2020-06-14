@@ -24,12 +24,12 @@ public class TradeRepositoryTest {
     HibernateTemplate mockTemplate;
 
     @Autowired
-    TradeRepository tradeDao;
+    TradeRepository tradeRepository;
 
 
     @BeforeEach
     public void initMocks() {
-        tradeDao.setHibernateTemplate(mockTemplate);
+        tradeRepository.setHibernateTemplate(mockTemplate);
         MockitoAnnotations.initMocks(this);
     }
 
@@ -37,7 +37,7 @@ public class TradeRepositoryTest {
     public void storeTradeSuccessfully() throws Exception {
         TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
-        tradeDao.save(tradeModel);
+        tradeRepository.save(tradeModel);
         verify(mockTemplate, times(1)).save(tradeModel);
     }
 
@@ -45,19 +45,35 @@ public class TradeRepositoryTest {
     //@Test
     public void findMaxVersion() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TradeRepository tradeDao = (TradeRepository) context.getBean("tradeDao");
+        TradeRepository tradeRepository = (TradeRepository) context.getBean("tradeRepository");
         TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
-        tradeDao.delete(tradeDao.findByTradeId(tradeModel.getTradeId()));
-        tradeDao.save(tradeModel);
-        Assertions.assertEquals(tradeModel.getTradeVersion(), tradeDao.findMaxVersion(tradeModel.getTradeId()).get());
+        tradeRepository.delete(tradeRepository.findByTradeId(tradeModel.getTradeId()));
+        tradeRepository.save(tradeModel);
+        Assertions.assertEquals(tradeModel.getTradeVersion(), tradeRepository.findMaxVersion(tradeModel.getTradeId()).get());
         TradeModel tradeModelVersion2 = new TradeModel("T1", 2L, "CP-1", "B1", new Date(),
                 new Date(), true);
-        tradeDao.save(tradeModelVersion2);
-        Assertions.assertEquals(tradeModelVersion2.getTradeVersion(), tradeDao.findMaxVersion(tradeModel.getTradeId()).get());
+        tradeRepository.save(tradeModelVersion2);
+        Assertions.assertEquals(tradeModelVersion2.getTradeVersion(), tradeRepository.findMaxVersion(tradeModel.getTradeId()).get());
         TradeModel tradeMode3 = new TradeModel("T3", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
-        tradeDao.save(tradeMode3);
-        Assertions.assertEquals(tradeMode3.getTradeVersion(), tradeDao.findMaxVersion(tradeMode3.getTradeId()).get());
+        tradeRepository.save(tradeMode3);
+        Assertions.assertEquals(tradeMode3.getTradeVersion(), tradeRepository.findMaxVersion(tradeMode3.getTradeId()).get());
     }
+
+    @Test
+    public void findLastVersion() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TradeRepository tradeRepository = (TradeRepository) context.getBean("tradeRepository");
+        TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
+                new Date(), false);
+        TradeModel tradeModelVersion2 = new TradeModel("T1", 2L, "CP-1", "B1", new Date(),
+                new Date(), true);
+        tradeRepository.delete(tradeRepository.findByTradeId(tradeModel.getTradeId()));
+        tradeRepository.save(tradeModel);
+        tradeRepository.save(tradeModelVersion2);
+        Assertions.assertEquals(tradeModelVersion2.getTradeVersion(), tradeRepository.findLastVersionByTradId(tradeModel
+                .getTradeId()).get().getTradeVersion());
+    }
+
 }

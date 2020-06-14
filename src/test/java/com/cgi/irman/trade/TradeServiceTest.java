@@ -33,7 +33,7 @@ public class TradeServiceTest extends BaseTest{
     HibernateTemplate mockTemplate;
 
     @MockBean
-    TradeRepository tradeDao;
+    TradeRepository tradeRepository;
 
     @Autowired
     TradeService tradeService;
@@ -42,8 +42,8 @@ public class TradeServiceTest extends BaseTest{
     @BeforeEach
     public void initMocks() {
         validators = Arrays.asList(new NullValidator(), new DateValidator());
-        tradeDao.setHibernateTemplate(mockTemplate);
-        tradeService.setTradeDao(tradeDao);
+        tradeRepository.setHibernateTemplate(mockTemplate);
+        tradeService.setTradeRepository(tradeRepository);
         tradeService.setValidators(validators);
         MockitoAnnotations.initMocks(this);
     }
@@ -53,7 +53,7 @@ public class TradeServiceTest extends BaseTest{
         Trade trade = getTrade();
         TradeModel tradeModel = getTradeModel(trade);
         tradeService.store(trade);
-        verify(tradeDao, times(1)).save(tradeModel);
+        verify(tradeRepository, times(1)).save(tradeModel);
     }
 
     @Test

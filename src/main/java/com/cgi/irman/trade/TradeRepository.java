@@ -24,6 +24,7 @@ public class TradeRepository {
         hibernateTemplate.save(tradeModel);
     }
 
+    //TODO use findLastVersionByTradId to get last version of a trade
     @Transactional(readOnly = true)
     public Optional<Long> findMaxVersion(String tradeId) {
         DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
@@ -66,5 +67,16 @@ public class TradeRepository {
 
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
         this.hibernateTemplate = hibernateTemplate;
+    }
+
+    public Optional<TradeModel> findLastVersionByTradId(String tradeId) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
+        criteria.add(Restrictions.eq("tradeId", tradeId))
+                .setProjection(Projections.projectionList()
+                        .add(groupProperty("tradeId"), "tradeId")
+                        .add(Projections.max("tradeVersion"), "tradeVersion"));
+        criteria.setResultTransformer(Transformers.aliasToBean(TradeModel.class));
+        List<TradeModel> list = (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
+        return list.stream().findFirst();
     }
 }
