@@ -9,6 +9,8 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +49,8 @@ public class TradeRepository {
     }
 
     @Transactional(readOnly = true)
-    public Optional<?> findById(String id) {
-        return hibernateTemplate.find("from Trade where Id = ?", id).stream().findFirst();
+    public Optional<?> findById(BigInteger id) {
+        return hibernateTemplate.find("from TradeModel where Id=?0", id).stream().findFirst();
     }
 
     public List<TradeModel> findByTradeId(String tradeId) {
@@ -78,5 +80,17 @@ public class TradeRepository {
         criteria.setResultTransformer(Transformers.aliasToBean(TradeModel.class));
         List<TradeModel> list = (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
         return list.stream().findFirst();
+    }
+
+
+    public List<TradeModel> findAllForMaxMaturityDate(Date date) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
+
+        criteria.add(Restrictions.lt("maturityDate", date))
+                .setProjection(Projections.projectionList()
+                        .add(groupProperty("tradeId"), "tradeId")
+                        .add(Projections.max("maturityDate"), "maturityDate"));
+        criteria.setResultTransformer(Transformers.aliasToBean(TradeModel.class));
+        return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
     }
 }

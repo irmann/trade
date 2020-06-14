@@ -1,5 +1,6 @@
 package com.cgi.irman.trade;
 
+import com.cgi.irman.trade.util.Constants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -41,6 +47,10 @@ public class TradeRepositoryTest {
         verify(mockTemplate, times(1)).save(tradeModel);
     }
 
+    private Date getDate(String date) throws ParseException {
+        return new SimpleDateFormat(Constants.DD_MM_YYYY).parse(date);
+    }
+
     // an integration test with DB
     //@Test
     public void findMaxVersion() throws Exception {
@@ -61,7 +71,7 @@ public class TradeRepositoryTest {
         Assertions.assertEquals(tradeMode3.getTradeVersion(), tradeRepository.findMaxVersion(tradeMode3.getTradeId()).get());
     }
 
-    @Test
+    //@Test
     public void findLastVersion() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TradeRepository tradeRepository = (TradeRepository) context.getBean("tradeRepository");
@@ -76,4 +86,27 @@ public class TradeRepositoryTest {
                 .getTradeId()).get().getTradeVersion());
     }
 
+    //@Test
+    public void findAllForMaxMaturityDate() throws Exception {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        TradeRepository tradeRepository = (TradeRepository) context.getBean("tradeRepository");
+        TradeModel tradeModel1 = new TradeModel("T1", 1L, "CP-1", "B1", getDate("02/01/2020"),
+                new Date(), false);
+        TradeModel tradeModel2 = new TradeModel("T1", 2L, "CP-1", "B1", getDate("03/01/2020"),
+                new Date(), true);
+        TradeModel tradeModel3 = new TradeModel("T2", 1L, "CP-1", "B1", getDate("02/01/2021"),
+                new Date(), false);
+        TradeModel tradeModel4 = new TradeModel("T2", 2L, "CP-1", "B1", getDate("01/01/2021"),
+                new Date(), true);
+        tradeRepository.delete(tradeRepository.findAll());
+        tradeRepository.save(tradeModel1);
+        tradeRepository.save(tradeModel2);
+        tradeRepository.save(tradeModel3);
+        tradeRepository.save(tradeModel4);
+
+        List<TradeModel> list = tradeRepository.findAllForMaxMaturityDate(new Date());
+        Assertions.assertEquals(1, list.size());
+        Assertions.assertEquals("T1", list.get(0).getTradeId());
+        Assertions.assertEquals("2020-01-03 00:00:00.0", list.get(0).getMaturityDate().toString());
+    }
 }
