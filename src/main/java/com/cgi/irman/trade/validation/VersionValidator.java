@@ -28,6 +28,6 @@ public class VersionValidator extends ValidatorBase implements ValidatorInterfac
         Optional<Long> max = this.tradeDao.findMaxVersion(trade.getTradeId());
         if(max.orElse(-1l) >= trade.getTradeVersion())
             throw new ValidatorException(ERROR_VALIDATION_VERSION, MessageFormat.format(
-                    "version must be more then {0}", max.get()));
+                    "Version is invalid. ُThe value must be higher then current version that is {0}}", max.get()));
     }
 }
