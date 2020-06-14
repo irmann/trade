@@ -27,9 +27,9 @@ public class TradeControllerTest extends BaseTest{
 
     @Test
     public void tradeShouldReturnSuccessResponseFromService() throws Exception {
-        Trade trade = getTrade();
+        TradeDTO trade = getTrade();
         Response response = new Response(0, "OK", 0);
-        Mockito.when(service.store(any(Trade.class))).thenReturn(response);
+        Mockito.when(service.store(any(TradeDTO.class))).thenReturn(response);
         this.mockMvc.perform(post("/api/v1/trade")
                 .content(JsonUtil.asJsonString(trade))
                 .contentType("application/json")).andDo(print())

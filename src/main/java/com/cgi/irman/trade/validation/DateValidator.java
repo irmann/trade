@@ -1,6 +1,6 @@
 package com.cgi.irman.trade.validation;
 
-import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.TradeDTO;
 import com.cgi.irman.trade.exceptions.ValidatorException;
 import com.cgi.irman.trade.util.Constants;
 
@@ -14,7 +14,7 @@ public class DateValidator extends ValidatorBase implements ValidatorInterface {
             "^\\d{2}/\\d{2}/\\d{4}$");
 
     @Override
-    public void validate(Trade trade) throws ValidatorException {
+    public void validate(TradeDTO trade) throws ValidatorException {
         if (!DATE_PATTERN.matcher(trade.getMaturityDate()).matches())
             throw new ValidatorException(ERROR_VALIDATION_DATE,
                     MessageFormat.format("Maturity date format is invalid. expected pattern is {0}"

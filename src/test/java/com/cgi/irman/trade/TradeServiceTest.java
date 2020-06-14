@@ -23,7 +23,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-@SpringBootTest(classes = {TradeService.class, TradeDao.class})
+@SpringBootTest(classes = {TradeService.class, TradeDAO.class})
 @ContextConfiguration(classes={TestifierApplicationTests.class})
 public class TradeServiceTest extends BaseTest{
 
@@ -33,7 +33,7 @@ public class TradeServiceTest extends BaseTest{
     HibernateTemplate mockTemplate;
 
     @MockBean
-    TradeDao tradeDao;
+    TradeDAO tradeDao;
 
     @Autowired
     TradeService tradeService;
@@ -50,7 +50,7 @@ public class TradeServiceTest extends BaseTest{
 
     @Test
     public void storeTradeSuccessful() throws Exception {
-        Trade trade = getTrade();
+        TradeDTO trade = getTrade();
         TradeModel tradeModel = getTradeModel(trade);
         tradeService.store(trade);
         verify(tradeDao, times(1)).save(tradeModel);
@@ -58,7 +58,7 @@ public class TradeServiceTest extends BaseTest{
 
     @Test
     public void failedByNullTradeId() throws Exception {
-        Trade trade = getTrade();
+        TradeDTO trade = getTrade();
         TradeModel tradeModel = getTradeModel(trade);
         trade.setTradeId(null);
         Response response = tradeService.store(trade);
@@ -68,7 +68,7 @@ public class TradeServiceTest extends BaseTest{
 
     @Test
     public void failedByWrongDateFormatTradeId() throws Exception {
-        Trade trade = getTrade();
+        TradeDTO trade = getTrade();
         TradeModel tradeModel = getTradeModel(trade);
         trade.setMaturityDate("a wrong format");
         Response response = tradeService.store(trade);

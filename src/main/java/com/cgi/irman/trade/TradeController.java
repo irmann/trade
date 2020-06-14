@@ -34,9 +34,9 @@ public class TradeController {
     private TradeService service;
 
     @PostMapping("/api/v1/trade")
-    public Response storeTrade(@RequestBody Trade trade) {
+    public Response storeTrade(@RequestBody TradeDTO trade) {
         try{
-            // To differentiate initializing the service between unit test and production runtime
+            //To differentiate initializing the service between unit test and production runtime
             if(service.getValidators() == null)
                 service = ApplicationContextHolder.getContext().getBean(TradeService.class);
 

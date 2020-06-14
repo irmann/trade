@@ -1,12 +1,12 @@
 package com.cgi.irman.trade.validation;
 
-import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.TradeDTO;
 import com.cgi.irman.trade.exceptions.ValidatorException;
 import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_REQUITED;
 
 public class NullValidator  extends ValidatorBase implements ValidatorInterface{
     @Override
-    public void validate(Trade trade) throws ValidatorException {
+    public void validate(TradeDTO trade) throws ValidatorException {
         if (trade.getTradeId() == null || trade.getTradeId().isEmpty())
             throw createException( "Trade id is required");
         if (trade.getTradeVersion() == null )
