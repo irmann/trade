@@ -59,6 +59,7 @@ public class TradeRepository {
     public List<TradeModel> findAll() {
         DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
         criteria.addOrder(Order.desc("tradeId"))
+                .addOrder( Order.desc("tradeVersion") )
                ;
         return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
     }
