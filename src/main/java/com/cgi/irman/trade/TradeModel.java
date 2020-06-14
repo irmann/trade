@@ -100,22 +100,12 @@ public class TradeModel {
         return maturityDate;
     }
 
-    public String getMaturityDateFormatted() {
-
-        return new SimpleDateFormat(Constants.DD_MM_YYYY).format(maturityDate);
-    }
-
     public void setMaturityDate(Date maturityDate) {
         this.maturityDate = maturityDate;
     }
 
     public Date getCreatedDate() {
         return createdDate;
-    }
-
-    public String getCreatedDateFormatted() {
-
-        return new SimpleDateFormat(Constants.DD_MM_YYYY).format(createdDate);
     }
 
     public void setCreatedDate(Date createdDate) {

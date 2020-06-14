@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,9 +41,25 @@ public class TradeService {
         return new SimpleDateFormat(Constants.DD_MM_YYYY).parse(date);
     }
 
-    public List<TradeModel> findAll() {
-        return tradeRepository.findAll();
+    public List<Trade> findAll() {
+        List<Trade> list = new ArrayList();
+        for (TradeModel tradeModel: tradeRepository.findAll()){
+            Trade trade = new Trade();
+            trade.setTradeId(tradeModel.getTradeId());
+            trade.setTradeVersion(tradeModel.getTradeVersion());
+            trade.setCountryPartyId(tradeModel.getCountryPartyId());
+            trade.setBookId(tradeModel.getBookId());
+            trade.setMaturityDate(dateFormatted(tradeModel.getMaturityDate()));
+            trade.setCreatedDate(dateFormatted(tradeModel.getCreatedDate()));
+            trade.setExpired(tradeModel.getExpired());
+            list.add(trade);
+        }
+        return list;
     }
+    public String dateFormatted(Date date) {
+        return new SimpleDateFormat(Constants.DD_MM_YYYY).format(date);
+    }
+
     public TradeRepository getTradeRepository() {
         return tradeRepository;
     }

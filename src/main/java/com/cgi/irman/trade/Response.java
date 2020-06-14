@@ -7,7 +7,7 @@ public class Response {
     private int status;
     private String message;
     private int errorCode;
-    private List<TradeModel> payload = new ArrayList<>();
+    private List<Trade> payload = new ArrayList<>();
 
     public Response(int status, String message, int errorCode) {
         this.status = status;
@@ -15,7 +15,7 @@ public class Response {
         this.errorCode = errorCode;
     }
 
-    public Response(int status, String message, int errorCode, List<TradeModel> payload) {
+    public Response(int status, String message, int errorCode, List<Trade> payload) {
         this.status = status;
         this.message = message;
         this.errorCode = errorCode;
@@ -46,11 +46,11 @@ public class Response {
         this.errorCode = errorCode;
     }
 
-    public List<TradeModel> getPayload() {
+    public List<Trade> getPayload() {
         return payload;
     }
 
-    public void setPayload(List<TradeModel> payload) {
+    public void setPayload(List<Trade> payload) {
         this.payload = payload;
     }
 
