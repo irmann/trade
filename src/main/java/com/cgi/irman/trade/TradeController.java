@@ -34,7 +34,7 @@ public class TradeController {
     private TradeService service;
 
     @PostMapping("/api/v1/trade")
-    public Response storeTrade(@RequestBody Trade trade) throws Exception {
+    public Response storeTrade(@RequestBody Trade trade) {
         try{
             // To differentiate initializing the service between unit test and production runtime
             if(service.getValidators() == null)
@@ -53,7 +53,7 @@ public class TradeController {
     }
 
     @GetMapping("/api/v1/trade")
-    public Response findAllTrades() throws Exception {
+    public Response findAllTrades() {
         try{
             service = ApplicationContextHolder.getContext().getBean(TradeService.class);
             Response response = new Response(0, "OK", 0);
