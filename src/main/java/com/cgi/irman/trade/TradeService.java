@@ -5,6 +5,7 @@ import com.cgi.irman.trade.util.Constants;
 import com.cgi.irman.trade.validation.ValidatorInterface;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +26,18 @@ public class TradeService {
         }
         TradeModel tradeModel = new TradeModel(trade.getTradeId(), trade.getTradeVersion(),
                 trade.getCountryPartyId(), trade.getBookId(),
-                new SimpleDateFormat(Constants.DD_MM_YYYY).parse(trade.getMaturityDate()),
-                new Date(), trade.getExpired());
-
+                getDate(trade.getMaturityDate()),
+                getCreatedDate(trade), trade.getExpired());
         tradeDao.save(tradeModel);
         return new Response(0, "OK", 0);
+    }
+
+    private Date getCreatedDate(Trade trade) throws ParseException {
+        return trade.getCreatedDate() != null ? getDate(trade.getCreatedDate()) : new Date();
+    }
+
+    private Date getDate(String date) throws ParseException {
+        return new SimpleDateFormat(Constants.DD_MM_YYYY).parse(date);
     }
 
     public List<TradeModel> findAll() {

@@ -58,6 +58,8 @@ definitions:
           type: "string"
         maturityDate:
           type: "string"
+        createdDate:
+            type: "string"
         expired:
           type: "bool"
 

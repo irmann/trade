@@ -8,6 +8,7 @@ public class Trade {
     private String countryPartyId;
     private String bookId;
     private String maturityDate;
+    private String createdDate;
     private Boolean expired;
 
     public Trade() {}
@@ -68,4 +69,12 @@ public class Trade {
     public void setExpired(Boolean expired) {
         this.expired = expired;
     }
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
 }

@@ -15,10 +15,18 @@ public class DateValidator extends ValidatorBase implements ValidatorInterface {
 
     @Override
     public void validate(Trade trade) throws ValidatorException {
-        if (!DATE_PATTERN.matcher(trade.getMaturityDate()).matches())
-            throw new ValidatorException(ERROR_VALIDATION_DATE,
-                    MessageFormat.format("Maturity date format is invalid. expected pattern is {0}"
-                            , Constants.DD_MM_YYYY));
+        if (!DATE_PATTERN.matcher(trade.getMaturityDate()).matches()) {
+            throwException("Maturity date");
+        }else{
+            if (trade.getMaturityDate() != null  && !DATE_PATTERN.matcher(trade.getMaturityDate()).matches()) {
+                throwException("Created date");
+            }
+        }
+    }
 
+    private void throwException(String name) throws ValidatorException {
+        throw new ValidatorException(ERROR_VALIDATION_DATE,
+                MessageFormat.format("{0} format is invalid. expected pattern is {0}"
+                        ,name, Constants.DD_MM_YYYY));
     }
 }
