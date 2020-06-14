@@ -1,6 +1,7 @@
 package com.cgi.irman.trade;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
@@ -57,6 +58,8 @@ public class TradeRepository {
 
     public List<TradeModel> findAll() {
         DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
+        criteria.addOrder(Order.desc("tradeId"))
+               ;
         return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
     }
 
