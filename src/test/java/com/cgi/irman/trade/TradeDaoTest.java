@@ -1,7 +1,5 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

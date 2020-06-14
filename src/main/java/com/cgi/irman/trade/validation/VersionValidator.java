@@ -1,15 +1,14 @@
-package com.cgi.irman.testifier.validation;
+package com.cgi.irman.trade.validation;
 
-import com.cgi.irman.testifier.Trade;
-import com.cgi.irman.testifier.TradeDao;
-import com.cgi.irman.testifier.TradeModel;
-import com.cgi.irman.testifier.exceptions.ValidatorException;
+import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.TradeDao;
+import com.cgi.irman.trade.exceptions.ValidatorException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.MessageFormat;
 import java.util.Optional;
 
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_VERSION;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_VERSION;
 
 public class VersionValidator extends ValidatorBase implements ValidatorInterface{
 

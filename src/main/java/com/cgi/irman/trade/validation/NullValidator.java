@@ -1,8 +1,8 @@
-package com.cgi.irman.testifier.validation;
+package com.cgi.irman.trade.validation;
 
-import com.cgi.irman.testifier.Trade;
-import com.cgi.irman.testifier.exceptions.ValidatorException;
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_REQUITED;
+import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.exceptions.ValidatorException;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_REQUITED;
 
 public class NullValidator  extends ValidatorBase implements ValidatorInterface{
     @Override

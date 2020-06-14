@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

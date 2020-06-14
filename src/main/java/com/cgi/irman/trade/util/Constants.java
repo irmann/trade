@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier.util;
+package com.cgi.irman.trade.util;
 
 public class Constants {
 

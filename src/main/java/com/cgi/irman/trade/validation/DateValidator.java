@@ -1,13 +1,13 @@
-package com.cgi.irman.testifier.validation;
+package com.cgi.irman.trade.validation;
 
-import com.cgi.irman.testifier.Trade;
-import com.cgi.irman.testifier.exceptions.ValidatorException;
-import com.cgi.irman.testifier.util.Constants;
+import com.cgi.irman.trade.Trade;
+import com.cgi.irman.trade.exceptions.ValidatorException;
+import com.cgi.irman.trade.util.Constants;
 
 import java.text.MessageFormat;
 import java.util.regex.Pattern;
 
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_DATE;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_DATE;
 
 public class DateValidator extends ValidatorBase implements ValidatorInterface {
     private static Pattern DATE_PATTERN = Pattern.compile(

@@ -1,13 +1,13 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestifierApplication {
+public class TradeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestifierApplication.class, args);
+		SpringApplication.run(TradeApplication.class, args);
 	}
 
 }

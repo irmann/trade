@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projections;

@@ -1,12 +1,11 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import com.cgi.irman.testifier.util.ApplicationContextHolder;
-import com.cgi.irman.testifier.util.JsonUtil;
+import com.cgi.irman.trade.util.ApplicationContextHolder;
+import com.cgi.irman.trade.util.JsonUtil;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;

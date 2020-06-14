@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
 import java.util.ArrayList;
 import java.util.List;

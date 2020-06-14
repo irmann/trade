@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier.exceptions;
+package com.cgi.irman.trade.exceptions;
 
 public class ValidatorException extends Exception {
 

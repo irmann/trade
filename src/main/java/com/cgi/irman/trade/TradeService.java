@@ -1,8 +1,8 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import com.cgi.irman.testifier.exceptions.ValidatorException;
-import com.cgi.irman.testifier.util.Constants;
-import com.cgi.irman.testifier.validation.ValidatorInterface;
+import com.cgi.irman.trade.exceptions.ValidatorException;
+import com.cgi.irman.trade.util.Constants;
+import com.cgi.irman.trade.validation.ValidatorInterface;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;

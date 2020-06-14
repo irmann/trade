@@ -26,23 +26,23 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.cgi.irman.testifier"/>
+        <property name="packagesToScan" value="com.cgi.irman.trade"/>
     </bean>
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="nullValidator" class="com.cgi.irman.testifier.validation.NullValidator"/>
-    <bean id="dateValidator" class="com.cgi.irman.testifier.validation.DateValidator"/>
-    <bean id="versionValidator" class="com.cgi.irman.testifier.validation.VersionValidator"/>
+    <bean id="nullValidator" class="com.cgi.irman.trade.validation.NullValidator"/>
+    <bean id="dateValidator" class="com.cgi.irman.trade.validation.DateValidator"/>
+    <bean id="versionValidator" class="com.cgi.irman.trade.validation.VersionValidator"/>
 
-    <bean id="tradeDao" class="com.cgi.irman.testifier.TradeDao">
+    <bean id="tradeDao" class="com.cgi.irman.trade.TradeDao">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
-    <bean id="tradeService" class="com.cgi.irman.testifier.TradeService">
+    <bean id="tradeService" class="com.cgi.irman.trade.TradeService">
         <property name="tradeDao" ref="tradeDao"/>
         <property name="validators">
-            <list value-type="com.cgi.irman.testifier.validation.ValidatorInterface">
+            <list value-type="com.cgi.irman.trade.validation.ValidatorInterface">
                 <ref bean="nullValidator"/>
                 <ref bean="dateValidator"/>
                 <ref bean="versionValidator"/>

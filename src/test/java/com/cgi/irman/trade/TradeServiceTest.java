@@ -1,8 +1,8 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import com.cgi.irman.testifier.validation.DateValidator;
-import com.cgi.irman.testifier.validation.NullValidator;
-import com.cgi.irman.testifier.validation.ValidatorInterface;
+import com.cgi.irman.trade.validation.DateValidator;
+import com.cgi.irman.trade.validation.NullValidator;
+import com.cgi.irman.trade.validation.ValidatorInterface;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_DATE;
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_REQUITED;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_DATE;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_REQUITED;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier.util;
+package com.cgi.irman.trade.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 

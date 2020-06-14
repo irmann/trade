@@ -1,4 +1,4 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
 
 public class Trade {

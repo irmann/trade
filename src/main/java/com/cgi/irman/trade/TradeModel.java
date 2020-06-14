@@ -1,6 +1,6 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import com.cgi.irman.testifier.util.Constants;
+import com.cgi.irman.trade.util.Constants;
 
 import javax.persistence.*;
 import java.math.BigInteger;

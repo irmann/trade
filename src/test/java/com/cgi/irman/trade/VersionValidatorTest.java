@@ -1,7 +1,7 @@
-package com.cgi.irman.testifier;
+package com.cgi.irman.trade;
 
-import com.cgi.irman.testifier.exceptions.ValidatorException;
-import com.cgi.irman.testifier.validation.VersionValidator;
+import com.cgi.irman.trade.exceptions.ValidatorException;
+import com.cgi.irman.trade.validation.VersionValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 
 import java.util.Optional;
 
-import static com.cgi.irman.testifier.util.Constants.ERROR_VALIDATION_VERSION;
+import static com.cgi.irman.trade.util.Constants.ERROR_VALIDATION_VERSION;
 
 import static org.mockito.Mockito.when;
 
