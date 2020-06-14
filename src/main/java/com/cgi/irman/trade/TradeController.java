@@ -64,6 +64,7 @@ public class TradeController {
         }
     }
 
+    //TODO move initializing of kafka template in applicationContext.xml
     private KafkaTemplate<Integer, String> createTemplate() {
         Map<String, Object> senderProps = senderProps();
         ProducerFactory<Integer, String> pf =
@@ -72,6 +73,7 @@ public class TradeController {
         return template;
     }
 
+    //TODO move to applicationContext.xml
     private Map<String, Object> senderProps() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
