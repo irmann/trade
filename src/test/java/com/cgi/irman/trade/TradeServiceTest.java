@@ -49,7 +49,7 @@ public class TradeServiceTest extends BaseTest{
     }
 
     @Test
-    public void storeTradeSuccessful() throws Exception {
+    public void storeTradeSuccessfully() throws Exception {
         TradeDTO trade = getTrade();
         TradeModel tradeModel = getTradeModel(trade);
         tradeService.store(trade);

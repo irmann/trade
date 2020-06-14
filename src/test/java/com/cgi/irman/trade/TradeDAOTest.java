@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 
 
 @SpringBootTest(classes = {TradeDAO.class})
-public class TradeDaoTest {
+public class TradeDAOTest {
 
     @MockBean
     HibernateTemplate mockTemplate;
@@ -35,29 +35,29 @@ public class TradeDaoTest {
 
     @Test
     public void storeTradeSuccessfully() throws Exception {
-        TradeModel tradeModel = new TradeModel("T1", 1l, "CP-1", "B1", new Date(),
+        TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
         tradeDao.save(tradeModel);
         verify(mockTemplate, times(1)).save(tradeModel);
     }
 
+    // an integration test with DB
     //@Test
     public void findMaxVersion() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         TradeDAO tradeDao = (TradeDAO) context.getBean("tradeDao");
-        TradeModel tradeModel = new TradeModel("T1", 1l, "CP-1", "B1", new Date(),
+        TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
         tradeDao.delete(tradeDao.findByTradeId(tradeModel.getTradeId()));
         tradeDao.save(tradeModel);
         Assertions.assertEquals(tradeModel.getTradeVersion(), tradeDao.findMaxVersion(tradeModel.getTradeId()).get());
-        TradeModel tradeModelVersion2 = new TradeModel("T1", 2l, "CP-1", "B1", new Date(),
+        TradeModel tradeModelVersion2 = new TradeModel("T1", 2L, "CP-1", "B1", new Date(),
                 new Date(), true);
         tradeDao.save(tradeModelVersion2);
         Assertions.assertEquals(tradeModelVersion2.getTradeVersion(), tradeDao.findMaxVersion(tradeModel.getTradeId()).get());
-        TradeModel tradeMode3 = new TradeModel("T3", 1l, "CP-1", "B1", new Date(),
+        TradeModel tradeMode3 = new TradeModel("T3", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
         tradeDao.save(tradeMode3);
         Assertions.assertEquals(tradeMode3.getTradeVersion(), tradeDao.findMaxVersion(tradeMode3.getTradeId()).get());
     }
-
 }

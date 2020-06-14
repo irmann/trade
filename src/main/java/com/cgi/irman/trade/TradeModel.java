@@ -15,7 +15,8 @@ public class TradeModel {
 
     }
 
-    public TradeModel(BigInteger id, String tradeId, Long tradeVersion, String countryPartyId, String bookId, Date maturityDate, Date createdDate, Boolean expired) {
+    public TradeModel(BigInteger id, String tradeId, Long tradeVersion, String countryPartyId, String bookId
+            , Date maturityDate, Date createdDate, Boolean expired) {
         Id = id;
         this.tradeId = tradeId;
         this.tradeVersion = tradeVersion;
@@ -26,7 +27,7 @@ public class TradeModel {
         this.expired = expired;
     }
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private BigInteger Id;
@@ -144,9 +145,8 @@ public class TradeModel {
             if (td.Id != null && td.Id.equals(this.Id))
                 return true;
             else {
-                if (td.getTradeId() != null && td.getTradeId().equals(this.getTradeId())
-                        && td.getTradeVersion() != null && td.getTradeVersion().equals(this.getTradeVersion()))
-                    return true;
+                return td.getTradeId() != null && td.getTradeId().equals(this.getTradeId())
+                        && td.getTradeVersion() != null && td.getTradeVersion().equals(this.getTradeVersion());
             }
         }
         return false;

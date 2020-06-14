@@ -23,10 +23,7 @@ public class TradeDAO {
         hibernateTemplate.save(tradeModel);
     }
 
-    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-        this.hibernateTemplate = hibernateTemplate;
-    }
-
+    @Transactional(readOnly = true)
     public Optional<Long> findMaxVersion(String tradeId) {
         DetachedCriteria criteria = DetachedCriteria.forClass(TradeModel.class);
         criteria.add(Restrictions.eq("tradeId", tradeId))
@@ -36,7 +33,7 @@ public class TradeDAO {
         criteria.setResultTransformer(Transformers.aliasToBean(TradeModel.class));
         List<?> list = hibernateTemplate.findByCriteria(criteria);
         return list.stream().map(trade ->
-                ((TradeModel)trade).getTradeVersion())
+                ((TradeModel) trade).getTradeVersion())
                 .findFirst();
     }
 
@@ -45,6 +42,11 @@ public class TradeDAO {
         if (!tradeList.isEmpty()) {
             hibernateTemplate.deleteAll(tradeList);
         }
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<?> findById(String id) {
+        return hibernateTemplate.find("from Trade where Id = ?", id).stream().findFirst();
     }
 
     public List<TradeModel> findByTradeId(String tradeId) {
@@ -58,4 +60,7 @@ public class TradeDAO {
         return (List<TradeModel>) hibernateTemplate.findByCriteria(criteria);
     }
 
+    public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
+        this.hibernateTemplate = hibernateTemplate;
+    }
 }

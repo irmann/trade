@@ -40,8 +40,8 @@ public class VersionValidatorTest extends BaseTest{
     @Test
     public void failedValidateVersion() throws Exception {
         TradeDTO trade = getTrade();
-        trade.setTradeVersion(1l);
-        Optional<Long> max = Optional.of(2l);
+        trade.setTradeVersion(1L);
+        Optional<Long> max = Optional.of(2L);
         when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);
         try{
             versionValidator.validate(trade);
@@ -54,8 +54,8 @@ public class VersionValidatorTest extends BaseTest{
     @Test
     public void successfulValidateVersion() throws Exception {
         TradeDTO trade = getTrade();
-        trade.setTradeVersion(2l);
-        Optional<Long> max = Optional.of(1l);
+        trade.setTradeVersion(2L);
+        Optional<Long> max = Optional.of(1L);
         when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);
         try{
             versionValidator.validate(trade);
