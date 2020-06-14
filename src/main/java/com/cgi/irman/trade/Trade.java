@@ -1,7 +1,7 @@
 package com.cgi.irman.trade;
 
 
-public class TradeDTO {
+public class Trade {
 
     private String tradeId;
     private Long tradeVersion;
@@ -10,9 +10,9 @@ public class TradeDTO {
     private String maturityDate;
     private Boolean expired;
 
-    public TradeDTO() {}
+    public Trade() {}
 
-    public TradeDTO(String tradeId, Long tradeVersion, String countryPartyId, String bookId, String maturityDate, Boolean expired) {
+    public Trade(String tradeId, Long tradeVersion, String countryPartyId, String bookId, String maturityDate, Boolean expired) {
         this.tradeId = tradeId;
         this.tradeVersion = tradeVersion;
         this.countryPartyId = countryPartyId;

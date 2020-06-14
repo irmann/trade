@@ -13,9 +13,9 @@ import java.util.List;
 public class TradeService {
 
     List<ValidatorInterface> validators;
-    TradeDAO tradeDao;
+    TradeRepository tradeDao;
 
-    public Response store(TradeDTO trade) throws Exception {
+    public Response store(Trade trade) throws Exception {
         for (ValidatorInterface v : validators) {
             try {
                 v.validate(trade);
@@ -35,11 +35,11 @@ public class TradeService {
     public List<TradeModel> findAll() {
         return tradeDao.findAll();
     }
-    public TradeDAO getTradeDao() {
+    public TradeRepository getTradeDao() {
         return tradeDao;
     }
 
-    public void setTradeDao(TradeDAO tradeDao) {
+    public void setTradeDao(TradeRepository tradeDao) {
         this.tradeDao = tradeDao;
     }
 

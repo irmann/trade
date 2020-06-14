@@ -25,7 +25,7 @@ public class VersionValidatorTest extends BaseTest{
     HibernateTemplate mockTemplate;
 
     @MockBean
-    TradeDAO tradeDao;
+    TradeRepository tradeDao;
 
     @Autowired
     VersionValidator versionValidator;
@@ -39,7 +39,7 @@ public class VersionValidatorTest extends BaseTest{
 
     @Test
     public void failedValidateVersion() throws Exception {
-        TradeDTO trade = getTrade();
+        Trade trade = getTrade();
         trade.setTradeVersion(1L);
         Optional<Long> max = Optional.of(2L);
         when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);
@@ -53,7 +53,7 @@ public class VersionValidatorTest extends BaseTest{
 
     @Test
     public void successfulValidateVersion() throws Exception {
-        TradeDTO trade = getTrade();
+        Trade trade = getTrade();
         trade.setTradeVersion(2L);
         Optional<Long> max = Optional.of(1L);
         when(tradeDao.findMaxVersion(trade.getTradeId())).thenReturn(max);

@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.hibernate.criterion.Projections.groupProperty;
 
 @Service
-public class TradeDAO {
+public class TradeRepository {
 
     private HibernateTemplate hibernateTemplate;
 

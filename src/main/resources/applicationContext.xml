@@ -36,7 +36,7 @@
     <bean id="dateValidator" class="com.cgi.irman.trade.validation.DateValidator"/>
     <bean id="versionValidator" class="com.cgi.irman.trade.validation.VersionValidator"/>
 
-    <bean id="tradeDao" class="com.cgi.irman.trade.TradeDAO">
+    <bean id="tradeDao" class="com.cgi.irman.trade.TradeRepository">
         <property name="hibernateTemplate" ref="hibernateTemplate"/>
     </bean>
     <bean id="tradeService" class="com.cgi.irman.trade.TradeService">

@@ -17,14 +17,14 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 
-@SpringBootTest(classes = {TradeDAO.class})
-public class TradeDAOTest {
+@SpringBootTest(classes = {TradeRepository.class})
+public class TradeRepositoryTest {
 
     @MockBean
     HibernateTemplate mockTemplate;
 
     @Autowired
-    TradeDAO tradeDao;
+    TradeRepository tradeDao;
 
 
     @BeforeEach
@@ -45,7 +45,7 @@ public class TradeDAOTest {
     //@Test
     public void findMaxVersion() throws Exception {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TradeDAO tradeDao = (TradeDAO) context.getBean("tradeDao");
+        TradeRepository tradeDao = (TradeRepository) context.getBean("tradeDao");
         TradeModel tradeModel = new TradeModel("T1", 1L, "CP-1", "B1", new Date(),
                 new Date(), false);
         tradeDao.delete(tradeDao.findByTradeId(tradeModel.getTradeId()));
