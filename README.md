@@ -15,10 +15,15 @@ docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpasswo
 
 ### create table
 docker exec -it some-postgres  bash
+
 psql -h localhost -U postgres
+
 CREATE DATABASE demo;
+
 \c demo;
+
 CREATE TABLE trade(id serial PRIMARY KEY,trade_id VARCHAR (20), trade_version integer, country_party_id VARCHAR (20), book_id VARCHAR (20), maturity_date timestamp, created_date timestamp, expired boolean);
+
 
 ### start the database
 docker start some-postgres
@@ -33,10 +38,12 @@ bin/kafka-server-start.sh config/server.properties
 
 #### create a topic
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test2
 
 #### create a producer and a consumer
 bin/kafka-console-producer.sh --bootstrap-server localhost:9092 --topic test
+
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test2 --from-beginning
 
 ## Build
